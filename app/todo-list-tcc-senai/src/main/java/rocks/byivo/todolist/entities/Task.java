@@ -10,13 +10,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author byivo
  */
 @Entity
-public class Task implements Serializable {
+@Table(name = "tasks")
+public class Task implements Entidade<Long> {
 
     @Id
     @GeneratedValue
@@ -37,10 +39,12 @@ public class Task implements Serializable {
         this.mName = mName;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
