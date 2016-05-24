@@ -5,6 +5,7 @@
  */
 package rocks.byivo.todolist.controllers;
 
+import java.util.List;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,26 +30,26 @@ public abstract class GenericController<T extends IEntity<ID>, ID> {
 
     @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public String update(@ModelAttribute T obj) {
-        return String.valueOf(this.getService().update(obj));
+    public T update(@ModelAttribute T obj) {
+        return this.getService().update(obj);
     }
 
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable(value = "id") ID id) {
-       return String.valueOf(this.getService().delete(id));
+    public T delete(@PathVariable(value = "id") ID id) {
+       return this.getService().delete(id);
     }
 
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String findById(@PathVariable(value = "id") ID id) {
-        return String.valueOf(this.getService().findById(id));
+    public T findById(@PathVariable(value = "id") ID id) {
+        return this.getService().findById(id);
     }
 
     @ResponseBody
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public String list() {
-        return this.getService().list().toString();
+    public List<T> list() {
+        return this.getService().list();
     }
 
 }
