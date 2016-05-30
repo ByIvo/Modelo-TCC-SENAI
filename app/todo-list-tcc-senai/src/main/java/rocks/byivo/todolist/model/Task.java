@@ -5,43 +5,56 @@
  */
 package rocks.byivo.todolist.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+import javax.persistence.Basic;
 import rocks.byivo.todolist.interfaces.IEntity;
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author byivo
  */
 @Entity
-@Table(name = "tasks")
+@Table(name = "task")
+@SQLDelete(sql = "UPDATE task SET deleted = 1 WHERE id = ?")
+@Where(clause = "deleted <> 1")
 public class Task implements IEntity<Long> {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(name = "name")
-    private String mName;
+    @Column(name = "name", length = 80, nullable = false)
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Basic(optional = false)
+    private TBoard board;
+
+    @ManyToMany
+    @JoinTable(name = "task_has_user",
+                joinColumns = {@JoinColumn(name = "id")},
+                inverseJoinColumns = {@JoinColumn(name = "id")})
+    private List<User> users;
+
+    @Column(name = "deleted")
+    @JsonIgnore
+    private Boolean deleted;
 
     public Task() {
-
-    }
-
-    public Task(String mName) {
-        this.mName = mName;
-    }
-
-    public String getmName() {
-        return mName;
-    }
-
-    public void setmName(String mName) {
-        this.mName = mName;
+        deleted = false;
     }
 
     @Override
@@ -54,9 +67,41 @@ public class Task implements IEntity<Long> {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public TBoard getBoard() {
+        return board;
+    }
+
+    public void setBoard(TBoard board) {
+        this.board = board;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
-        return "Task{" + "id=" + id + ", mName=" + mName + '}';
+        return "Task{" + "id=" + id + ", name=" + name + ", board=" + board + ", deleted=" + deleted + '}';
     }
 
 }
