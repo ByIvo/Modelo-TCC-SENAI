@@ -3,3 +3,5 @@ documentacao/mockups/*
 documentacao/*.png
 documentacao/*.jpg
 /app/todo-list-tcc-senai/target/
+
+/app/todo-list-tcc-senai/src/main/mail.properties
