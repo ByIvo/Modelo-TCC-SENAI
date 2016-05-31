@@ -8,7 +8,7 @@ package rocks.byivo.todolist.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rocks.byivo.todolist.dao.TaskDao;
+import rocks.byivo.todolist.dao.TaskDAO;
 import rocks.byivo.todolist.interfaces.IBaseActions;
 import rocks.byivo.todolist.model.Task;
 import rocks.byivo.todolist.services.TaskService;
@@ -22,7 +22,7 @@ import rocks.byivo.todolist.services.TaskService;
 public class TaskServiceImpl extends GenericService<Task, Long> implements TaskService {
 
     @Autowired
-    private TaskDao taskDAO;
+    private TaskDAO taskDAO;
 
     @Override
     protected IBaseActions<Task, Long> getDao() {

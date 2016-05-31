@@ -12,6 +12,6 @@ import rocks.byivo.todolist.model.Task;
  *
  * @author byivo
  */
-public interface TaskDao extends IBaseActions<Task, Long>{
+public interface TaskDAO extends IBaseActions<Task, Long>{
     
 }

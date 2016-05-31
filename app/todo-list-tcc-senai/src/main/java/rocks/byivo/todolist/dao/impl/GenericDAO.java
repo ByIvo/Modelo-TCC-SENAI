@@ -67,6 +67,10 @@ public class GenericDAO<T extends IEntity<ID>, ID> implements IBaseActions<T, ID
      @Override
     @Transactional
     public T delete(T obj) {
+        if(!this.entityManager.contains(obj)) {
+            obj = this.entityManager.merge(obj);
+        }
+        
         this.entityManager.remove(obj);
         return obj;
     }
