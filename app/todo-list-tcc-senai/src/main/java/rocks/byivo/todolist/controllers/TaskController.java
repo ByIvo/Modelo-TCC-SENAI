@@ -6,11 +6,8 @@
 package rocks.byivo.todolist.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import rocks.byivo.todolist.interfaces.IBaseActions;
 import rocks.byivo.todolist.model.Task;
 import rocks.byivo.todolist.services.TaskService;
@@ -19,7 +16,7 @@ import rocks.byivo.todolist.services.TaskService;
  *
  * @author byivo
  */
-@Controller()
+@RestController()
 @RequestMapping("/tasks")
 public class TaskController extends GenericController<Task, Long>{
 
