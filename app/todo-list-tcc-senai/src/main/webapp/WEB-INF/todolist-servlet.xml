@@ -77,7 +77,7 @@
           class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <!--<bean class="class converter" />-->
+                <bean class="rocks.byivo.todolist.converters.TBoardConverter" />
             </set>
         </property>
     </bean>
