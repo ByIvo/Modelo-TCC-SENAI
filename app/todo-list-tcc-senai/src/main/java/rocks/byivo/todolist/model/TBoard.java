@@ -9,6 +9,7 @@ package rocks.byivo.todolist.model;
  *
  * @author byivo
  */
-public class TBoard {
-    
+public enum TBoard {
+
+    TO_DO , DONE, DOING;
 }

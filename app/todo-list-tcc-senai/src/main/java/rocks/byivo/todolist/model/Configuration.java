@@ -20,6 +20,8 @@ import rocks.byivo.todolist.interfaces.IEntity;
 @Table(name = "configuration")
 public class Configuration implements IEntity<Long> {
 
+    public static final Long EMAIL_CONFIGURATION_ID = 1l;
+    
     @Id
     @GeneratedValue
     private Long id;

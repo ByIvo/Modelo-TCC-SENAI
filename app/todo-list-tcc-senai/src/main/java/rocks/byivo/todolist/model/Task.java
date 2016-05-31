@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -43,10 +44,10 @@ public class Task implements IEntity<Long> {
     @Basic(optional = false)
     private TBoard board;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "task_has_user",
-                joinColumns = {@JoinColumn(name = "id")},
-                inverseJoinColumns = {@JoinColumn(name = "id")})
+                joinColumns = {@JoinColumn(name = "task_id")},
+                inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> users;
 
     @Column(name = "deleted")
