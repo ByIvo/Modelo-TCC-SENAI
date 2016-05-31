@@ -20,12 +20,19 @@ import rocks.byivo.todolist.services.TaskService;
 @RequestMapping("/tasks")
 public class TaskController extends GenericController<Task, Long>{
 
+    public static final String PATH= "/tasks";
+    
     @Autowired
     private TaskService taskService;
 
     @Override
     protected IBaseActions<Task, Long> getService() {
         return this.taskService;
+    }
+
+    @Override
+    protected String getPath() {
+        return PATH;
     }
    
 }

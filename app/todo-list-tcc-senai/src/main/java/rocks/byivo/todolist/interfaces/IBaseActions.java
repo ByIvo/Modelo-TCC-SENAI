@@ -35,12 +35,20 @@ public interface IBaseActions<T extends IEntity<ID>, ID> extends Serializable {
     public T update(T obj) throws DataAccessException;
 
     /**
+     * Delete an <T> object in databaseby its <ID> ID.
+     *
+     * @param ID to be deleted.
+     * @return the <T> obj that was deleted from database.
+     */
+    public T delete(ID id) throws DataAccessException;
+    
+    /**
      * Delete an <T> object in database.
      *
      * @param obj to be deleted.
      * @return the <T> obj that was deleted from database.
      */
-    public T delete(ID obj) throws DataAccessException;
+    public T delete(T obj) throws DataAccessException;
 
     /**
      * Find a specific <T> object in database by his unique <ID> identifier.

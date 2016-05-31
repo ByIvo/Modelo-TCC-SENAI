@@ -28,7 +28,12 @@ public abstract class GenericService<T extends IEntity<ID>,ID> implements IBaseA
     }
 
     @Override
-    public T delete(ID obj) throws DataAccessException {
+    public T delete(ID id) throws DataAccessException {
+        return this.getDao().delete(id);
+    }
+    
+     @Override
+    public T delete(T obj) throws DataAccessException {
         return this.getDao().delete(obj);
     }
 
