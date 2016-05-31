@@ -7,7 +7,6 @@ package rocks.byivo.todolist.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Basic;
 import rocks.byivo.todolist.interfaces.IEntity;
 import javax.persistence.Column;

@@ -26,7 +26,6 @@ public class TaskServiceImpl extends GenericService<Task, Long> implements TaskS
 
     @Override
     protected IBaseActions<Task, Long> getDao() {
-        return taskDAO;
+        return this.taskDAO;
     }
-
 }

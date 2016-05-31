@@ -32,7 +32,7 @@ public class TaskController extends GenericController<Task, Long>{
 
     @Override
     protected String getPath() {
-        return PATH;
+        return TaskController.PATH;
     }
    
 }
