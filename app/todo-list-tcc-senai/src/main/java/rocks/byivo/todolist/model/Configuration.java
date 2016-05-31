@@ -18,7 +18,7 @@ import rocks.byivo.todolist.interfaces.IEntity;
  */
 @Entity
 @Table(name = "configuration")
-public class Configuration implements IEntity<Long> {
+public class Configuration extends GenericEntity<Long> {
 
     public static final Long EMAIL_CONFIGURATION_ID = 1l;
     
@@ -50,6 +50,22 @@ public class Configuration implements IEntity<Long> {
     public Configuration() {
     }
 
+    @Override
+    public void updateEntity(IEntity<Long> newEntity) {
+        if (!this.isThisEntity(newEntity)) {
+            return;
+        }
+        Configuration newObj = (Configuration) newEntity;
+
+        this.setAuth(newObj.getAuth());
+        this.setFromEmail(newObj.getFromEmail());
+        this.setFromPassword(newObj.getFromPassword());
+        this.setPort(newObj.getPort());
+        this.setServerHost(newObj.getServerHost());
+        this.setSocketFactory(newObj.getSocketFactory());
+        this.setSocketPort(newObj.getSocketPort());
+    }
+    
     @Override
     public Long getId() {
         return id;

@@ -20,4 +20,6 @@ public interface IEntity<ID> extends Serializable {
     public void setId(ID id);
 
     public ID getId();
+    
+    public void updateEntity(IEntity<ID> newEntity);
 }

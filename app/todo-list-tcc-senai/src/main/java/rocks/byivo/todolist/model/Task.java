@@ -7,6 +7,7 @@ package rocks.byivo.todolist.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import rocks.byivo.todolist.interfaces.IEntity;
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ import org.hibernate.annotations.Where;
 @Table(name = "task")
 @SQLDelete(sql = "UPDATE task SET deleted = 1 WHERE id = ?")
 @Where(clause = "deleted <> 1")
-public class Task implements IEntity<Long> {
+public class Task extends GenericEntity<Long> {
 
     @Id
     @GeneratedValue
@@ -46,8 +47,10 @@ public class Task implements IEntity<Long> {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "task_has_user",
-                joinColumns = {@JoinColumn(name = "task_id")},
-                inverseJoinColumns = {@JoinColumn(name = "user_id")})
+            joinColumns = {
+                @JoinColumn(name = "task_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "user_id")})
     private List<User> users;
 
     @Column(name = "deleted")
@@ -56,6 +59,17 @@ public class Task implements IEntity<Long> {
 
     public Task() {
         deleted = false;
+    }
+
+    @Override
+    public void updateEntity(IEntity<Long> newEntity) {
+        if (!this.isThisEntity(newEntity)) {
+            return;
+        }
+        Task newObj = (Task) newEntity;
+
+        this.setBoard(newObj.getBoard());
+        this.setName(newObj.getName());
     }
 
     @Override
@@ -103,6 +117,12 @@ public class Task implements IEntity<Long> {
     @Override
     public String toString() {
         return "Task{" + "id=" + id + ", name=" + name + ", board=" + board + ", deleted=" + deleted + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
     }
 
 }

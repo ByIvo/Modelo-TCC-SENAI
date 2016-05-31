@@ -19,15 +19,30 @@ import rocks.byivo.todolist.interfaces.IEntity;
  */
 @Entity
 @Table(name = "email_layout")
-public class EmailLayout implements IEntity<String> {
+public class EmailLayout extends GenericEntity<String> {
 
     @Enumerated(EnumType.STRING)
     @Id
     @Column(name = "layout_name")
     private TLayoutName layoutName;
-    
+
     @Column(name = "editable_layout", nullable = false)
     private String editableLayout;
+
+    public EmailLayout() {
+    }
+
+    @Override
+    public void updateEntity(IEntity<String> newEntity) {
+        if (!this.isThisEntity(newEntity)) {
+            return;
+        }
+        
+        EmailLayout newObj = (EmailLayout) newEntity;
+
+        this.setEditableLayout(newObj.getEditableLayout());
+        this.setLayoutName(newObj.getLayoutName());
+    }
 
     @Override
     public void setId(String id) {

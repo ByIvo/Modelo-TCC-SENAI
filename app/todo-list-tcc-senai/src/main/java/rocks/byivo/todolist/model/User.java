@@ -23,7 +23,7 @@ import rocks.byivo.todolist.interfaces.IEntity;
 @Table(name = "user")
 @SQLDelete(sql = "UPDATE user SET deleted = 1 WHERE id = ?")
 @Where(clause = "deleted <> 1")
-public class User implements IEntity<Long>{
+public class User extends GenericEntity<Long>{
     
     @Id
     @GeneratedValue
@@ -51,6 +51,17 @@ public class User implements IEntity<Long>{
     public User() {
         deleted = false;
         adm = false;
+    }
+    
+    @Override
+    public void updateEntity(IEntity<Long> newEntity) {
+        if (!this.isThisEntity(newEntity)) {
+            return;
+        }
+        User newObj = (User) newEntity;
+
+        this.setName(newObj.getName());
+        this.setEmail(newObj.getEmail());
     }
 
     @Override

@@ -19,7 +19,7 @@ import rocks.byivo.todolist.interfaces.IEntity;
  */
 @Entity
 @Table(name = "task_has_user")
-public class TaskUser implements IEntity<Long> {
+public class TaskUser extends GenericEntity<Long> {
 
     @Id
     @GeneratedValue
@@ -34,6 +34,17 @@ public class TaskUser implements IEntity<Long> {
     private Task task;
 
     public TaskUser() {
+    }
+
+    @Override
+    public void updateEntity(IEntity<Long> newEntity) {
+        if (!this.isThisEntity(newEntity)) {
+            return;
+        }
+        TaskUser newObj = (TaskUser) newEntity;
+
+        this.setTask(newObj.getTask());
+        this.setUser(newObj.getUser());
     }
 
     @Override
@@ -66,5 +77,5 @@ public class TaskUser implements IEntity<Long> {
     public String toString() {
         return "TaskUser{" + "id=" + id + ", user=" + user + ", task=" + task + '}';
     }
-   
+
 }
