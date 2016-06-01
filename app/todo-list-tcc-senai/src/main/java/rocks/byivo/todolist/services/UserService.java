@@ -5,7 +5,10 @@
  */
 package rocks.byivo.todolist.services;
 
+import java.io.IOException;
+import java.util.List;
 import rocks.byivo.todolist.interfaces.IBaseActions;
+import rocks.byivo.todolist.model.Task;
 import rocks.byivo.todolist.model.User;
 
 /**
@@ -14,4 +17,8 @@ import rocks.byivo.todolist.model.User;
  */
 public interface UserService extends IBaseActions<User, Long>{
     
+    
+    public List<Task> getUserTasks(User user);
+    
+    public byte[] getUserProfile(User user) throws IOException;
 }
