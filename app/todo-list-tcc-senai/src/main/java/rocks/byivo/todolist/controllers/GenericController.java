@@ -81,11 +81,8 @@ public abstract class GenericController<T extends IEntity<ID>, ID> {
     public ResponseEntity<List<T>> list() {
         List<T> list = this.getService().list();
 
-        if (list.isEmpty()) {
-            return new ResponseEntity<>(list, HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        HttpStatus status = list.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
+        return new ResponseEntity<>(list, status);
     }
 
 }
