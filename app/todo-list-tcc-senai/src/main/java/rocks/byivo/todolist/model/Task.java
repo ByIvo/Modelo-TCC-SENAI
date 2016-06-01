@@ -6,19 +6,14 @@
 package rocks.byivo.todolist.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.List;
 import javax.persistence.Basic;
 import rocks.byivo.todolist.interfaces.IEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -44,13 +39,13 @@ public class Task extends GenericEntity<Long> {
     @Basic(optional = false)
     private TBoard board;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "task_has_user",
-            joinColumns = {
-                @JoinColumn(name = "task_id")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "user_id")})
-    private List<User> users;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "task_has_user",
+//            joinColumns = {
+//                @JoinColumn(name = "task_id")},
+//            inverseJoinColumns = {
+//                @JoinColumn(name = "user_id")})
+//    private List<User> users;
 
     @Column(name = "deleted")
     @JsonIgnore
@@ -89,13 +84,13 @@ public class Task extends GenericEntity<Long> {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
     public TBoard getBoard() {
         return board;

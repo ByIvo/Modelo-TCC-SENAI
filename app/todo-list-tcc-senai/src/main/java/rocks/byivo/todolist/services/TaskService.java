@@ -5,8 +5,10 @@
  */
 package rocks.byivo.todolist.services;
 
+import java.util.List;
 import rocks.byivo.todolist.interfaces.IBaseActions;
 import rocks.byivo.todolist.model.Task;
+import rocks.byivo.todolist.model.User;
 
 /**
  *
@@ -14,4 +16,5 @@ import rocks.byivo.todolist.model.Task;
  */
 public interface TaskService extends IBaseActions<Task, Long> {
 
+    public List<User> getTaskUsers(Task task);
 }
